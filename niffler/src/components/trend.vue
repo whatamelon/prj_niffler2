@@ -59,6 +59,7 @@
     
     <v-content>
       <v-container>
+          <form id="app" @submit="searchForm" action="/trend" method="post">
         <v-layout row wrap>
         <v-flex xs12>
           <v-subheader>검색어를 입력해주세요!</v-subheader>
@@ -67,30 +68,23 @@
          	 <v-card width="200px" height="70px">
          	 	<v-card-title class="pb-3">
          	 		<div>
-         	 			<input placeholder="검색어1" style="height:40px;">
+         	 			<input type="text" id="search1" name="search1" placeholder="검색어1"  style="height:40px;">
          	 		</div>
          	 	</v-card-title>
           	</v-card>
               <v-card class="second" width="200px" height="70px">
          	 	<v-card-title class="pb-3">
          	 		<div>
-         	 			<input placeholder="검색어2" style="height:40px;">
+         	 			<input type="text" id="search2" name="search2" placeholder="검색어2"  style="height:40px;">
          	 		</div>
          	 	</v-card-title>
           	</v-card>
         </v-flex>
             <div style="float:right; width:30px;">
-                <v-btn raised small class="right" color="#90CAF9">검색</v-btn>
+                <v-btn raised small class="right" color="#90CAF9" value="submit">검색</v-btn>
             </div>
-
-         <v-flex xs12 class="pt-4">
-
-        </v-flex>
-        <v-flex justify-center offset-xs1>
-         
-        </v-flex>
-   
         </v-layout>
+          </form>
       </v-container>
     </v-content>
   </v-app>
@@ -100,10 +94,58 @@
   export default {
    data () {
       return {
-        drawer: null
+        drawer: null,
+        title: '',
+        keywords:'',
+        period:'',
+        ratio:''
       }
+    },
+    computed:{
+      input:function(){
+      var request = require('request');
+      var client_id = 'v05bZlQfeJ5_HKwzHAh8';
+      var client_secret = 'ZYa6od5gqF';
+      var api_url = 'https://openapi.naver.com/v1/datalab/search';
+      var request_body = {
+        "startDate": "2018-01-01",
+        "endDate": "2018-04-30",
+        "timeUnit": "month",
+        "keywordGroups": [
+            {
+              "groupName": "",
+              "keywords": [
+                  "",
+                  ""
+              ]
+            },
+            {
+            "groupName": "",
+            "keywords": [
+                "",
+                ""
+              ]
+            }
+            ]
+        };
+
+        request.post({
+        url: api_url,
+        body: JSON.stringify(request_body),
+        headers: {
+            'X-Naver-Client-Id': v05bZlQfeJ5_HKwzHAh8,
+            'X-Naver-Client-Secret': ZYa6od5gqF,
+            'Content-Type': 'application/json'
+            }
+        },
+        function (error, response, body) {
+            console.log(response.statusCode);
+            console.log(body);
+            });
+
     }
-    }
+  }
+  }
 </script>
 
 <style scoped>

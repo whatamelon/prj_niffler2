@@ -59,7 +59,7 @@
     
     <v-content>
       <v-container>
-          <form id="app" @submit="searchForm" action="/trend" method="post">
+          <form id="app" @submit.prevent="searchForm" action="/trend" method="post">
         <v-layout row wrap>
         <v-flex xs12>
           <v-subheader>검색어를 입력해주세요!</v-subheader>
@@ -113,14 +113,14 @@
         "timeUnit": "month",
         "keywordGroups": [
             {
-              "groupName": "",
+              "groupName": "search1",
               "keywords": [
                   "",
                   ""
               ]
             },
             {
-            "groupName": "",
+            "groupName": "search2",
             "keywords": [
                 "",
                 ""

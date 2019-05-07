@@ -10,9 +10,7 @@ import '@mdi/font/css/materialdesignicons.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import LinkPrevue from 'link-prevue'
 import axios from 'axios'
-
 import './assets/stylus/main.styl'
-
 
 Vue.prototype.$http = axios
 

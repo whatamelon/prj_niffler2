@@ -101,8 +101,8 @@
         ratio:''
       }
     },
-    computed:{
-      input:function(){
+    methods:{
+      search(){
       var request = require('request');
       var client_id = 'v05bZlQfeJ5_HKwzHAh8';
       var client_secret = 'ZYa6od5gqF';
@@ -137,15 +137,25 @@
             'X-Naver-Client-Secret': ZYa6od5gqF,
             'Content-Type': 'application/json'
             }
-        },
-        function (error, response, body) {
-            console.log(response.statusCode);
-            console.log(body);
-            });
-
-    }
+        }),
+        axios
+        .get(url)
+        .then(response=>{
+          this.country = response.data.sys.country
+          this.city = response.data.name
+          this.tempMin = response.data.main.temp_min
+          this.tempMax = response.data.main.temp_max
+        })
+        .catch(error => {
+          console.log(error);
+        })
+        }
+      },
+  created(){
+    this.search();
   }
   }
+  
 </script>
 
 <style scoped>
